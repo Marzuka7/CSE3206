@@ -54,6 +54,43 @@ public:
     }
 };
 
-StudentManager* StudentManager::instance = nullptr;
+StudentManager* StudentManager::instance=nullptr;// define static instance
+
+//Test cases
+TEST(StudentManagerTest,AddAndRetrieveStudents) 
+{
+    auto* manager=StudentManager::getInstance();
+    manager->clear();
+
+    manager->addStudent("Marzuka");
+    manager->addStudent("Zannat");
+
+    vector<string> list=manager->getStudentList();
+    EXPECT_EQ(list.size(),2);
+    EXPECT_EQ(list[0],"Marzuka");
+    EXPECT_EQ(list[1],"Zannat");
+}
+
+TEST(StudentManagerTest,RemoveStudentWorks) 
+{
+    auto* manager=StudentManager::getInstance();
+    manager->clear();
+
+    manager->addStudent("Tazrian");
+    manager->addStudent("Lisa");
+
+    EXPECT_TRUE(manager->removeStudent("Tazrian"));
+    EXPECT_FALSE(manager->removeStudent("Unknown"));
+
+    vector<string> list=manager->getStudentList();
+    EXPECT_EQ(list.size(),1);
+    EXPECT_EQ(list[0],"Lisa");
+}
 
 
+
+int main(int argc, char** argv) 
+{
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}
