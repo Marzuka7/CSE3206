@@ -39,7 +39,7 @@ public:
 
     vector<string> getStudentList() {
         return students;
-    }
+    } 
 
     void displayStudents() 
     {
@@ -54,7 +54,7 @@ public:
     }
 };
 
-StudentManager* StudentManager::instance=nullptr;// define static instance
+StudentManager* StudentManager::instance=nullptr;
 
 //Test cases
 TEST(StudentManagerTest,AddAndRetrieveStudents) 
