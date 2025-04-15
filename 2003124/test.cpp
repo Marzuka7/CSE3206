@@ -88,9 +88,25 @@ TEST(StudentManagerTest,RemoveStudentWorks)
 }
 
 
+TEST(StudentManagerTest,AddDuplicateNames) {
+    auto* manager=StudentManager::getInstance();
+    manager->clear();
+
+    manager->addStudent("MZ");
+    manager->addStudent("MZ");
+    vector<string> list=manager->getStudentList();
+
+    EXPECT_EQ(list.size(),2);
+    EXPECT_EQ(list[0],"MZ");
+    EXPECT_EQ(list[1],"MZ");
+}
+
+
 
 int main(int argc, char** argv) 
 {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }
+
+
